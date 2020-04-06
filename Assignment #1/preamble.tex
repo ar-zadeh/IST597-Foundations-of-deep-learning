@@ -1,0 +1,140 @@
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usetikzlibrary{arrows, calc, babel, shapes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[fulladjust]{marginnote}
+\usepackage{rotating}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{paracol}
+\usepackage{tkz-fct}
+\usepackage{fancyhdr}
+\usepackage{xstring}
+\usepackage{geometry}
+\geometry{
+    left = .5in,
+    right = 1.5in,
+    top = 1in,
+    head = 1cm,
+    foot = .5in,
+    bindingoffset=0in,
+}
+\pagestyle{fancy}
+\lhead{\textbf{Penn State University}}
+\chead{\includegraphics[scale=.03]{penn}}
+\rhead{\textbf{Dept. of IST}}
+\graphicspath{{images/}}
+\hypersetup{%
+pdfauthor={Amirreza Bagherzadeh},%
+pdftitle={Homework},%
+pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
+pdfcreator={PDFLaTeX},%
+pdfproducer={PDFLaTeX},%
+}
+%\usetikzlibrary{shadows}
+
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+      \newtheorem{thm}{Teorema}[section]
+      \newtheorem{prop}[thm]{Proposición}
+      \newtheorem{lem}[thm]{Lema}
+      \newtheorem{cor}[thm]{Corolario}
+      \newtheorem{defn}[thm]{Definición}
+      \newtheorem{rem}[thm]{Nota}
+      \numberwithin{equation}{section}
+
+\newcommand{\homework}[6]{
+   \pagestyle{myheadings}
+   \thispagestyle{fancy}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 1\textwidth { {\bf{Deep learning} \hfill  PSUID:946204639} }
+       \vspace{6mm}
+       \hbox to 1\textwidth { {\Large \hfill #1 (#2)  \hfill} }
+       \vspace{6mm}
+       \hbox to 1\textwidth { {\it Professor: #3 \hfill Student: #5} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{#5 -- #1}{#5 -- #1}
+   \vspace*{4mm}
+}
+
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\0}{\mathbf{0}}
+
+\newcommand{\problem}[1]{
+    {\begin{tikzpicture}[outline/.style={draw=red!75!gray,thick,fill=red!80!white}]
+\node [outline=red] at (0,1) {\bf Problem #1};
+\end{tikzpicture}}
+}
+
+\newcommand{\solution}[1]{
+    {\begin{tikzpicture}[outline/.style={draw=green!75!gray,thick,fill=green!80!white}]
+\node [outline=red] at (0,1) {\bf Solution};
+\end{tikzpicture}}
+}
+
+
+\newcommand{\complexity}[1]{
+    {\begin{tikzpicture}[outline/.style={draw=blue!75!gray,thick,fill=blue!80!white}]
+\node [outline=blue] at (0,1) {\bf Complexity};
+\end{tikzpicture}}
+}
+
+\definecolor{myBlue}{HTML}{027FDF}
+\definecolor{negative}{HTML}{181818}
+\definecolor{positive}{HTML}{AA3939}
+
+
+\newcommand{\reaLine}[2]{
+    \node (li) at (#1 - 1.5, 0) {};
+    \node (ls) at (#2 + 1.5, 0) {$\mathbb{R}$};
+	\draw [>=stealth, <->] (li) -- (ls);
+}
+\newcommand{\interval}[7]{
+    \IfEqCase {#6}{
+        {nonInf}{
+        \node [circle, draw, #4, line width = 1.5pt, color = #7, inner sep = 0pt, minimum size = 5pt] (ci) at (#1, #3) {};
+        \node [circle, draw, #5, line width = 1.5pt, color = #7, inner sep = 0pt, minimum size = 5pt] (cs) at (#2, #3) {};
+        \draw [line width = 1.5pt, color = #7] (ci) -- (cs);
+        \draw (ci) -- (#1, -.2);
+        \node (tag) at (#1, -.4) {#1};
+        \draw (cs) -- (#2, -.2);
+        \node (tag) at (#2, -.4) {#2};
+        }
+        {inf}{
+        	\IfEqCase {#4}{
+            	{<-}{
+			        \node [circle, draw, #5, line width = 1.5pt, color = #7, inner sep = 0pt, minimum size = 5pt] (cs) at (#2, #3) {};
+                    \draw [>=stealth, #4, line width = 1.5pt, color = #7] (#1 - 1.5, #3) -- (cs);
+                    \draw (cs) -- (#2, -.2);
+                    \node (tag) at (#2, -.4) {#2};
+                }
+                {->}{
+                	\node [circle, draw, #5, line width = 1.5pt, color = #7, inner sep = 0pt, minimum size = 5pt] (ci) at (#1, #3) {};
+                    \draw [>=stealth, ->, line width = 1.5pt, color = #7] (ci) -- (#2 + 1.5, #3);
+                    \draw (ci) -- (#1, -.2);
+                    \node (tag) at (#1, -.4) {#1};
+                }
+            }
+        }
+        }[\PackageError{tree}{Undefined option to intervals: #6}{}]
+}
+%----------------------------------------------------

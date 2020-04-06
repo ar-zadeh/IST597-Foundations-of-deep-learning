@@ -1,0 +1,83 @@
+
+\documentclass[a4 paper]{article}
+\input{preamble.tex}
+
+\begin{document}
+\homework{First Assignment}{Sep. 1st 2019}{Clyde Lee Giles}{}{Amirreza Bagherzadeh}{}
+
+\vspace{5mm}
+
+\problem{1}  \textbf{N Biased Coins}
+\vskip 5mm
+\solution{}
+\\
+In this problem, we tackle this problem in following way:
+
+first we receive the N and their probability form the user, if they don't enter of them, we choose random values for them. Afterward, we iterate thought all possible conditions where the number of heads are more than tails. For all those conditions, we calculate the probability of the very condition to happen. The answer we looking for is the summation of all these probabilities
+\vspace{5mm}
+
+\complexity
+\\
+
+
+So depending on receiving the P and the number of times we are going to drop the coin the complexity changes. If we don’t have any value for P then the complexity would be N. and then finding all the possible combinations of heads to be greater than tails is in order of combination of N from $\frac{N}{2} $. Which leaves the complexity to be the combination of N from $\frac{N}{2}$.
+
+\vspace{10mm}
+
+\problem{2}  Select the kth element from matrix
+\vskip 5mm
+\solution{}
+
+In this problem we need to choose an element from every row and add its probability to the row after that. To do so we need the probability of each element. This can be calculated by the following:
+\vskip 5mm
+\begin{center}
+$P_X_{ij} = \frac{X_{ij}}{\sum_{j=0}^{M}X_{ij}}$
+\end{center}
+after that we add these probabilities to the elements of next row. We do this till we get to the last row. Now we can easily take probability for Kth element as follows:
+\vskip 5mm
+\begin{center}
+$P_k = \frac{X_{Nk}}{\sum_{j=0}^M X_{ij}}$
+\end{center}
+\complexity
+
+
+Since the only doing multiplication and addition, the complexity would be the number of times we doing it and we are doing it for $N^2$ times.
+\vspace{10mm}
+
+\problem{3} Markov Chain
+\vskip 5mm
+\solution{}
+
+In this problem we define a function that recieves 4 arguements: 1)\textbf{P} An N*N matrix representing the probability of traveling any node to another where N is the number of nodes. 2)\textbf{S} the node we start from. 3) \textbf{T} the time we want to analyze 4)\textbf{F} The desirable ending node. By receiving  these the function will calculate the probability of ending up at node \textbf{F} by the time \textbf{T} and starting from the point \textbf{S} by probability of moving from point \textit{i} to \textit{j}, $P_ij$.
+
+To do so, lets calculate the probability of moving from point i to any node by 2 moves which can be calculate by the following equation:
+
+\begin{center}
+$P[i][:] *P$
+\end{center}
+\\
+in other words, we start from node i and we may end up at point k with the probability of $P_ik$. After that, to ending up at point j we need to move from point k to j which probability is $P_kj$. The probability of moving from the point i to j by 2 moves we need to the summation of all the moves we can make to end up at point j by starting at point i. which is $P[i][:] *P[:][j]$ now to have that for all nodes we have to calculate it for all nodes instead of only j which is $P[i][:] *P$. Now with the same logic, we can say that the probability of moving from point i to any node by 3 moves which can be calculate by the following equation:
+
+\begin{center}
+$P[i][:] * P * P$
+\end{center}
+\\
+and for N moves is:
+
+\begin{center}
+$A=P[i][:] * P^N$
+\end{center}
+\\
+A is a vector of length N kth element represent the probability of ending up at point k starting from the node i. which is exactly what we need.
+
+\complexity
+
+
+In this method we multiply a vector to a matrix. Which makes a complexity of $N^2$ and then choosing the Sth number makes a complexity of 1. so the complexity would be $N^2$.$^1$
+
+
+References:
+
+1)Computational complexity of mathematical operations, Wikipedia
+\vspace{60mm}
+\end{document}
